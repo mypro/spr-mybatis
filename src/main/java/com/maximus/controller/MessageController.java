@@ -2,8 +2,10 @@ package com.maximus.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.maximus.model.Channel;
 import com.maximus.model.Msge;
 import com.maximus.service.BaseService;
+import com.maximus.service.ChannelService;
 import com.maximus.service.MessageService;
 import com.maximus.util.Lang;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +32,19 @@ public class MessageController extends AbstractAction {
     private BaseService baseService;
     @Autowired
     private MessageService messageService;
+    @Autowired
+    private ChannelService channelService;
 
     @RequestMapping("queryAll")
     public String queryAll(Model model, HttpServletRequest request, HttpServletResponse response, String channelId) throws UnsupportedEncodingException {
 //        int channel = Integer.valueOf(channelId);
         List<Msge> msgs = messageService.queryAll(channelId);
+        Channel channel = channelService.findChannelById(Integer.parseInt(channelId));
         model.addAttribute("msgs", msgs);
         model.addAttribute("channelId", channelId);
+        model.addAttribute("breadcrumb", channel.getName());
+        String menuId = "menu-"+channelId;
+        model.addAttribute("menuId", menuId);
         return "msg/msgList";
     }
 

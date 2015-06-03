@@ -76,7 +76,7 @@ $("#menu-allchannel").click(function(){
 									console.log(result);
 									$("#channelsName").children().remove();
 									for(var i=0;i<result.length;i++){
-									$("#channelsName").append("<li class=\"\" id=\"menu-mycensor-short\"><a href=\"msg/queryAll?channelId="+result[i].id+"\">"
+									$("#channelsName").append("<li class=\"\" id=\"menu-"+result[i].id+"\"><a href=\"msg/queryAll?channelId="+result[i].id+"\">"
 									 										+ "<i class=\"menu-icon fa fa-file-text\"></i>"+result[i].name+"</a> <b class=\"arrow\"></b></li>");
 									}
         				},

@@ -36,6 +36,7 @@ public class ChannelController extends AbstractAction {
 
         List<Channel> channels = channelService.queryAll();
         model.addAttribute("channels", channels);
+        model.addAttribute("breadcrumb", "频道管理");
         return "channel/channelList";
     }
 
